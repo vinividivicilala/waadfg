@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kategori Blog - Farid Ardiansyah</title>
+    <style>
+        /* Gaya CSS sama seperti halaman utama */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black;
+            color: white;
+            line-height: 1.6;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .navbar .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+            width: 50%;
+        }
+        .navbar .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+            background-color: #00ffcc;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .navbar .status {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            gap: 10px;
+            margin-right: 40px;
+        }
+        .navbar .status .dots span {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            animation: blink 1.4s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        .container {
+            padding: 80px 20px 20px;
+        }
+        .content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-size: 18px;
+        }
+        .footer .left {
+            font-weight: bold;
+            margin-left: 20px;
+        }
+        .footer .right a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 16px;
+        }
+        .footer .right a:hover {
+            text-decoration: underline;
+        }
+        .blog-posts {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .blog-post {
+            background-color: transparent;;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .blog-post img {
+            width: 150px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .blog-post .details {
+            flex: 1;
+        }
+        .blog-post .details h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .blog-post .details p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .blog-post .details .tags {
+            display: flex;
+            gap: 10px;
+        }
+        .blog-post .details .tags span {
+            background-color: transparent;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        .notice {
+           background-color: transparent;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .notice a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+        .notice a:hover {
+            text-decoration: underline;
+        }
+        .ad-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #00ffcc;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+		
+		.new-label {
+            background-color: #ff0000; /* Warna latar belakang */
+            color: black; /* Warna teks */
+            padding: 5px 10px; /* Padding */
+            border-radius: 5px; /* Sudut melengkung */
+            font-size: 14px; /* Ukuran font */
+            margin-left: 10px; /* Jarak dari judul */
+            display: inline-block; /* Agar label tidak mengambil seluruh baris */
+        }
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .by-author {
+            background-color: #1d4ed8; /* Warna biru */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .by-author a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .by-author a:hover {
+            text-decoration: underline;
+        }
+		
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+	<div class="brand">
+        <h1>Kategori Blog</h1>
+		<span class="by-author">
+		by <a href="https://www.instagram.com/fardardinsyh">@fardardinsyh</a>
+        </span>
+		</div>
+        <div class="marquee">
+            <span>Blog | <a href="index.html" style="color: black; text-decoration: none;">Kembali ke Beranda</a></span>
+        </div>
+        <div class="status">
+            Bersedia
+            <div class="dots">
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <!-- Notice Pengumuman -->
+            <div class="notice">
+                <p>📢 Pengumuman: Jangan lupa baca postingan terbaru! <a href="index.html">Kembali ke Beranda</a>.</p>
+            </div>
+
+            <!-- Daftar Blog -->
+            <h1>Kategori Blog : SUKA DUKA</h1>
+            <div class="blog-posts">
+                <!-- Blog 1 -->
+                <div class="blog-post">
+                    <div class="details">
+                        <h2><a href="blog1.html" style="color: #FFFFFF; text-decoration: none;">Selamat Datang di Blog Farid Ardiansyah</a><span class="new-label">New</span></h2>
+                        <p>Siapa yang tidak tau saya? postingan pertama saya, Terima Kasih.</p>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 2 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 3 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 4 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 5 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 6 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 7 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 8 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 9 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 10 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				                <!-- Blog 11 -->
+                <div class="blog-post">
+				<div class="details">
+                        <h2><a href="blog2.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+				
+
+                <!-- Blog 12 -->
+                <div class="blog-post">
+                    <div class="details">
+                        <h2><a href="blog3.html" style="color: #FFFFFF; text-decoration: none;">Coming Soon</a><span class="new-label">New</span></h2>
+                        <p>Coming Soon.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="left">
+            Farid Ardiansyah
+        </div>
+        <div class="right">
+            <a href="utamablog1.html">BLOG</a> <a href="11.html">LOG PROBLEM</a>  <a href="page2.html">AKTIVITAS</a> <a href=".html">FORUM</a>  <a href=".html">MEDIA</a>
+        </div>
+    </footer>
+
+    <!-- Notifikasi Iklan -->
+    <div class="ad-notification" id="adNotification">
+        🎉 Selamat datang di Kategori Blog Farid Ardiansyah!
+    </div>
+
+    <script>
+        // Fungsi untuk animasi scroll
+        document.addEventListener("DOMContentLoaded", function() {
+            const elements = document.querySelectorAll('.hidden');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            elements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // Fungsi untuk menampilkan notifikasi iklan
+        const adNotification = document.getElementById('adNotification');
+        setTimeout(() => {
+            adNotification.style.display = 'none';
+        }, 5000); // Notifikasi hilang setelah 5 detik
+
+        // Fungsi untuk menampilkan notifikasi browser
+        function showNotification(message) {
+            if (Notification.permission === "granted") {
+                new Notification("Blog Notification", { body: message });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(permission => {
+                    if (permission === "granted") {
+                        new Notification("Blog Notification", { body: message });
+                    }
+                });
+            }
+        }
+
+        // Menampilkan notifikasi saat halaman dimuat
+        window.addEventListener('load', () => {
+            showNotification("Anda sedang melihat Kategori Blog.");
+        });
+    </script>
+</body>
+</html>
